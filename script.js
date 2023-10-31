@@ -1,6 +1,6 @@
 var questions = [" Have you been feeling persistent sadness or hopelessness?","Do you experience trouble sleeping or sleeping too much?","Have you had thoughts of self-harm or suicide?"," Have you lost interest in activities you used to enjoy?","Do you find it difficult to concentrate or make decisions?"]
 var desc = ["This feelings have symptoms", "Please describe your personality"];
-var mental = ["Depression,,Schizophrenia", "Bipolar disorder", "Obsessive compulsive disorder ( OCD)", "Panic disorder", "Post traumatic stress (PTSD)", "Borderline personality disorder]"];
+var mental = ["Depression","Schizophrenia", "Bipolar disorder", "Obsessive compulsive disorder ( OCD)", "Panic disorder", "Post traumatic stress (PTSD)", "Borderline personality disorder]"];
 // var mental = ["Schizophrenia", "Panic Disorder", "Obbesive Compulsive Disorder"];
 
 var qnblock = document.getElementById("qnblock");
@@ -63,21 +63,21 @@ function changestep() {
         st4.style.color = "green";
         st4.style.backgroundColor = "#f0f0f0";
     }else if (step == 5){
-        const st4 = document.getElementById("st4");
-        st4.style.color = "green";
-        st4.style.backgroundColor = "#f0f0f0";
+        const st5 = document.getElementById("st5");
+        st5.style.color = "green";
+        st5.style.backgroundColor = "#f0f0f0";
     }else if (step == 6){
-        const st4 = document.getElementById("st4");
-        st4.style.color = "green";
-        st4.style.backgroundColor = "#f0f0f0";
+        const st6 = document.getElementById("st6");
+        st6.style.color = "green";
+        st6.style.backgroundColor = "#f0f0f0";
     }else if (step == 7){
-        const st4 = document.getElementById("st4");
-        st4.style.color = "green";
-        st4.style.backgroundColor = "#f0f0f0";
+        const st7 = document.getElementById("st7");
+        st7.style.color = "green";
+        st7.style.backgroundColor = "#f0f0f0";
     }else if (step == 8){
-        const st4 = document.getElementById("st4");
-        st4.style.color = "green";
-        st4.style.backgroundColor = "#f0f0f0";
+        const st8 = document.getElementById("st8");
+        st8.style.color = "green";
+        st8.style.backgroundColor = "#f0f0f0";
     }
 }
 
@@ -100,19 +100,31 @@ st1bar.innerHTML = stpbardata;
 
 function next() {
     if (step == 1) {
+        for (let index = 0; index < mental.length; index++) {
+            // const element = array[index];
+            if (document.getElementById('mental'+index).checked) {
+                score = score + 10;
+                document.getElementById('mental'+index).checked = true; 
+            }
+        }
         step = 2;
-    }else if (step == 2) {
-        step = 3; 
-    }else if (step == 3) {
-        step = 4; 
-    }else if (step == 4) {
-        step = 5; 
-    }else if (step == 5) {
-        step = 6; 
-    }else if (step == 6) {
-        step = 7; 
-    }else if (step == 7) {
-        step = 8; 
+    }else if(step < mental.length-1) {
+        if (document.getElementById('answer-yes').checked) {
+            score = score + 5;
+        }
+        step++; 
+    }else {
+        console.log("Finished");
+        if (score < 15) {
+            alert("You are sad And everything will be fine!");
+        }if (score < 50) {
+            alert("You are depressed and you should seek for proffessional guidance");
+        } else {
+            alert("You should jump right off the bridge");
+            
+        }
+        alert("You are depersed by Score: "+ score);
+        
     }
     changetab();
     changestep();
